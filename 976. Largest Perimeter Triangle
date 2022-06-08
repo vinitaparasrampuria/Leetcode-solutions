@@ -1,0 +1,22 @@
+""Given an integer array nums, return the largest perimeter of a triangle with a non-zero area, formed from three of these lengths. If it is impossible to form any triangle of a non-zero area, return 0.
+
+ 
+
+Example 1:
+
+Input: nums = [2,1,2]
+Output: 5
+Example 2:
+
+Input: nums = [1,2,1]
+Output: 0""
+
+class Solution:
+    def largestPerimeter(self, nums: List[int]) -> int:
+        nums.sort(reverse=True)
+        print(nums)
+        for j in range(0,len(nums)-2):
+            if nums[j]<nums[j+1]+nums[j+2]:
+                return nums[j]+nums[j+1]+nums[j+2]
+        return 0
+                
