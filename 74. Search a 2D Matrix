@@ -1,0 +1,49 @@
+""Write an efficient algorithm that searches for a value target in an m x n integer matrix matrix. This matrix has the following properties:
+
+Integers in each row are sorted from left to right.
+The first integer of each row is greater than the last integer of the previous row.
+ 
+
+Example 1:
+
+
+Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
+Output: true
+Example 2:
+
+
+Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13
+Output: false""
+
+
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        
+        R=len(matrix)
+        C=len(matrix[0])
+        
+        start=0
+        end=R-1
+        
+        while(start<=end):
+            midR=(start+end)//2
+            
+            if target>=matrix[midR][0] and target<=matrix[midR][-1]:
+                il=0
+                ih=C-1
+                
+                while(il<=ih):
+                    midC=(il+ih)//2
+                    
+                    if matrix[midR][midC]==target:
+                        return True
+                    elif matrix[midR][midC]>target:
+                        ih=midC-1
+                    else:
+                        il=midC+1
+                return False
+            elif target>matrix[midR][-1]:
+                start=midR+1
+            else:
+                end=midR-1
+        return False
