@@ -1,0 +1,42 @@
+""Given an m x n binary matrix mat, return the distance of the nearest 0 for each cell.
+
+The distance between two adjacent cells is 1.
+
+ 
+
+Example 1:
+
+
+Input: mat = [[0,0,0],[0,1,0],[0,0,0]]
+Output: [[0,0,0],[0,1,0],[0,0,0]]
+Example 2:
+
+
+Input: mat = [[0,0,0],[0,1,0],[1,1,1]]
+Output: [[0,0,0],[0,1,0],[1,2,1]]""
+
+class Solution:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        R=len(mat)
+        C=len(mat[0])
+        q=[]
+        
+        for i in range (R):
+            for j in range (C):
+                if mat[i][j]==0:
+                    q.append((i,j))
+                    print(q)
+                else:
+                    mat[i][j]="#"
+        
+        for r,c in q:
+            for x,y in (1,0),(-1,0),(0,1),(0,-1):
+                row=r+x
+                col=c+y
+                
+                if row>=0 and row<R and col>=0 and col<C and mat[row][col]=='#':
+                    mat[row][col]=mat[r][c]+1
+                    print(mat)
+                    q.append((row,col))
+        
+        return mat
